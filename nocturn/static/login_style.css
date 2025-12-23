@@ -1,0 +1,247 @@
+@font-face {
+    font-family: 'font';
+    src: url('/static/roboto.ttf') format("truetype");
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'font';
+
+    user-select: none;
+}
+
+:root{
+    --background-color:#131313;
+    --main-color:#c7c7c7;
+    --main-color2:#0b1c27;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+}
+
+.main{
+    display: grid;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-color);
+    grid-template-columns: 1fr 1fr;
+}
+
+.left-container{
+    display: flex;
+    justify-content: center;
+}
+
+.login-register-bar{
+    padding-top: 17rem;
+    border-radius: 10px;
+    width: 25rem;
+    color: var(--main-color);
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+    margin-bottom: 5rem;
+}
+
+.bar-group > input{
+    width: 100%;
+    height: 3rem;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    padding-left: .5rem;
+    font-size: 16px;
+    background-color: transparent;
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+}
+
+.bar-group.register{
+    display: none;
+}
+
+.bar-group.register.active {
+    display: block;
+}
+
+.nocturn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 70px;
+    margin-bottom: 3rem;
+    font-weight: bold;
+}
+
+
+#submitBtn{
+    cursor: pointer;
+    width: 100%;
+    height: 3rem;
+    background-color: var(--main-color);
+    border-radius: 5px;
+    color: var(--background-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 700;
+    margin-top: .5rem;
+    transition: .2s;
+}
+
+
+#submitBtn:hover{
+    background-color: #01426d;
+}
+
+.right-container{
+    margin: 1rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    background-image: url('/static/playlistbanners/d.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+
+
+.toggleBar{
+    display: flex;
+    gap: .3rem;
+    justify-content: center;
+    align-items: center;
+}
+
+#info{
+    font-size: 12px;
+    color: #ffffff52;
+}
+
+
+#toggleBtn{
+    cursor: pointer;
+    font-size: 15px;
+    transition: .2s;
+}
+
+#toggleBtn:hover{
+    color: #01426d;
+}
+
+
+#alert-bar {
+    position: fixed;
+    display: flex;
+    top: 1rem;
+    border-radius: 8px;
+    height: 4rem;
+    background-color: #000;
+    left: 1%;
+    opacity: 0;
+    transition: .5s opacity;
+    padding: 1rem;
+    align-items: center;
+    gap: .6rem;
+    z-index: 5;
+    color: var(--main-color);
+}
+
+#alert-bar.show {
+    opacity: 1;
+}
+
+
+
+
+#loadingScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    background: var(--background-color);
+    justify-content: center;
+    align-items: center;
+    transition: .3s ease-in;
+    z-index: 3;
+
+}
+
+
+#loadingScreen.hide{
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+
+.loader {
+  top: calc(50% - 32px);
+  left: calc(50% - 32px);
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  perspective: 300px;
+}
+
+.inner {
+  position: absolute;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;  
+}
+
+.inner.one {
+  left: 0%;
+  top: 0%;
+  animation: rotate-one 1s linear infinite;
+  border-bottom: 3px solid var(--main-color);
+}
+
+.inner.two {
+  right: 0%;
+  top: 0%;
+  animation: rotate-two 1s linear infinite;
+  border-right: 3px solid var(--main-color);
+}
+
+.inner.three {
+  right: 0%;
+  bottom: 0%;
+  animation: rotate-three 1s linear infinite;
+  border-top: 3px solid var(--main-color);
+}
+
+@keyframes rotate-one {
+  0% {
+    transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+  }
+}
+
+@keyframes rotate-two {
+  0% {
+    transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
+  }
+}
+
+@keyframes rotate-three {
+  0% {
+    transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+  }
+}

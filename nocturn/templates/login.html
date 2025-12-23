@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nocturn</title>
+    <link rel="stylesheet" href="static/login_style.css">
+</head>
+
+<body>
+    <div id="alert-bar">
+    </div>
+    <div id="loadingScreen">
+        <div class="loader">
+            <div class="inner one"></div>
+            <div class="inner two"></div>
+            <div class="inner three"></div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="left-container">
+            <div class="login-register-bar">
+                <div class="nocturn">
+                    Nocturn
+                </div>
+                
+                <div class="bar-group login">
+                    <div id="userName">Kullanıcı adı</div>
+                    <input class="loginInput" id="userNameInput" type="text" required>
+                </div>
+                <div class="bar-group register">
+                    <div id="firstName">Adın</div>
+                    <input class="loginInput" id="firstNameInput" type="text">
+                </div>
+                <div class="bar-group register">
+                    <div id="lastName">Soyadın</div>
+                    <input class="loginInput" id="lastNameInput" type="text">
+                </div>
+                <div class="bar-group login">
+                    <div id="password">Şifre</div>
+                    <input class="loginInput" id="passwordInput" type="password" required>
+                </div>
+                
+                <div id="submitBtn" onclick="login_register()">
+                    Giriş Yap
+                </div>
+                <div class="toggleBar">
+                    <div id="info">Henüz bir hesabın yok mu?</div>
+                    <div id="toggleBtn" onclick="toggleBar()">Kayıt ol</div>
+                </div>
+            </div>
+
+        </div>
+        <div class="right-container">
+        </div>
+    </div>
+    <script src="static/login.js"></script>
+</body>
+
+</html>

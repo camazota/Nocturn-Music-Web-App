@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nocturn</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div id="loadingScreen">
+        <div class="loader">
+            <div class="inner one"></div>
+            <div class="inner two"></div>
+            <div class="inner three"></div>
+        </div>
+    </div>
+    <div class="add-playlist-container" id="addPlaylistModal" style="display: none;">
+        <div class="modal-content">
+            <h2>Yeni Playlist Oluştur</h2>
+            <input type="text" id="playlistNameInput" placeholder="Playlist İsmi"
+                onkeypress="if(event.key==='Enter') createPlaylist()">
+            <div class="modal-buttons">
+                <button type="button" onclick="createPlaylist()">Oluştur</button>
+                <button type="button" onclick="closePlaylistModal()">İptal</button>
+            </div>
+        </div>
+    </div>
+    <div id="rename-playlist-bar" style="display: none;"></div>
+    <div id="redit-user-bar">
+    </div>
+    <div id="redit-playlist-bar">
+
+    </div>
+    <div id="alert-bar">
+        
+    </div>
+    <div class="main">
+        <div class="top-container">
+            <div class="left-container">
+                <div class="left-top-bar">
+                    <button type="button" class="nav-btn" onclick="showHome()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 3L4 9v12h5v-7h6v7h5V9l-8-6z" />
+                        </svg>
+                        Ana Sayfa
+                    </button>
+                    <button type="button" class="nav-btn" onclick="showProfile()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                        </svg>
+                        Profil
+                    </button>
+                    <button type="button" class="nav-btn" onclick="logout()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z" />
+                        </svg>
+                        Çıkış
+                    </button>
+                </div>
+                <div class="left-bottom-bar">
+                    <div class="playlist-header">Playlistlerin</div>
+                    <div class="playlist-list" id="playlistList"></div>
+                    <div class="create-playlist-btn" onclick="openPlaylistModal()">+</div>
+                </div>
+            </div>
+
+            <div class="mid-container">
+                <div id="mid-bar">
+                    
+                </div>
+
+            </div>
+        </div>
+
+        <div class="bottom-container">
+            <div class="player-info">
+                <img id="playerImg" src="static/playlistbanners/default.jpg" alt="Song">
+                <div class="player-text">
+                    <div id="playerSongName"></div>
+                    <div id="playerArtist">-</div>
+                </div>
+            </div>
+
+
+
+            <div class="player-controls">
+                <button type="button" id="shuffleBtn" onclick="toggleShuffle()" class="control-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z" />
+                    </svg>
+                </button>
+                <button type="button" onclick="previousSong()" class="control-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" />
+                    </svg>
+                </button>
+                <button type="button" id="playPauseBtn" onclick="togglePlayPause()" class="control-btn play-btn">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5v14l11-7z" />
+                    </svg>
+                </button>
+                <button type="button" onclick="nextSong()" class="control-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
+                    </svg>
+                </button>
+                <button type="button" id="loopBtn" onclick="toggleLoop()" class="control-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z" />
+                    </svg>
+                </button>
+                <div class="player-progress">
+                    <span id="currentTime">0:00</span>
+                    <input type="range" id="progressBar" min="0" max="100" value="0" oninput="seekTo()">
+                    <span id="duration">0:00</span>
+                </div>
+            </div>
+            <div class="sound-control">
+                <svg class="icon" id="volumeIcon" onclick="toggleMute()" viewBox="0 0 16 16">
+                    <path
+                        d="M9.741.85a.75.75 0 01.375.65v13a.75.75 0 01-1.125.65l-6.925-4a3.642 3.642 0 01-1.33-4.967 3.639 3.639 0 011.33-1.332l6.925-4a.75.75 0 01.75 0zm-6.924 5.3a2.139 2.139 0 000 3.7l5.8 3.35V2.8l-5.8 3.35zm8.683 4.29V5.56a2.75 2.75 0 010 4.88z" />
+                    <path d="M11.5 13.614a5.752 5.752 0 000-11.228v1.55a4.252 4.252 0 010 8.127v1.55z"
+                        id="volumeWaves" />
+                </svg>
+                <input id="volumeBar" type="range" min="0" max="1" step="0.01" value="1" oninput="changeVolume()">
+            </div>
+
+
+            <audio id="audioPlayer"></audio>
+        </div>
+    </div>
+
+    <script src="/static/index.js"></script>
+</body>
+
+</html>
